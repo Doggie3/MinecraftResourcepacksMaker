@@ -8,6 +8,7 @@ using System.IO.Compression;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Windows;
+using System.Windows.Controls.Primitives;
 using System.Windows.Media.Imaging;
 
 namespace MinecraftResourcepacksMaker
@@ -58,35 +59,6 @@ namespace MinecraftResourcepacksMaker
             InitializeComponent();
         }
 
-        public void NewProject()
-        {
-            this.Title = ProjectDesciprion + "@" + ProjectVersion;
-            var PackMcmeta = new PackMcmeta
-            {
-                Pack = new PackageInfo
-                {
-                    Description = ProjectDesciprion,
-                    pack_format = int.Parse(ProjectVersion),
-                    MaxFormat = int.Parse(ProjectVersion),
-                    MinFormat = int.Parse(ProjectVersion)
-                }
-            };
-            string jsonString = JsonSerializer.Serialize(PackMcmeta, new JsonSerializerOptions
-            {
-                WriteIndented = true // 格式化输出
-            });
-            File.CreateText(ProjectLocation + "\\pack.mcmeta").Close();
-            File.WriteAllText(ProjectLocation + "\\pack.mcmeta", jsonString);
-            originalData = "\\data\\" + ProjectVersion.ToString() + "\\assets\\minecraft\\textures";
-            if (File.Exists(ProjectCover))
-            {
-                File.Copy(ProjectCover, ProjectLocation + "\\pack.png", true);
-
-            }
-            InitializeFolderStructure();
-            InitializeTextureList();
-
-        }
         public string SelectFile(string title, string filter)
         {
             string selectedFilePath = "null";
@@ -130,6 +102,7 @@ namespace MinecraftResourcepacksMaker
             }
             return bitmap;
         }
+
         private void newProject_Click(object sender, RoutedEventArgs e)
         {
             MakeNewProject form2 = new MakeNewProject();
@@ -139,6 +112,7 @@ namespace MinecraftResourcepacksMaker
         {
             try
             {
+                progressBar.Value = 0;
                 string projectFileLocation = SelectFile("选择材质包", "资源包识别文件 (pack.mcmeta)|pack.mcmeta");
                 if (projectFileLocation == null)
                 {
@@ -151,12 +125,51 @@ namespace MinecraftResourcepacksMaker
                 ProjectVersion = packMcmeta.Pack.pack_format.ToString();
                 this.Title = ProjectDesciprion + "@" + ProjectVersion;
                 originalData = "\\data\\" + ProjectVersion.ToString() + "\\assets\\minecraft\\textures";
+                progressBar.Value = 20;
                 InitializeTextureList();
+                progressBar.Value = 50;
+                InitializeProjectInfo();
+                progressBar.Value = 100;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("打开失败：" + ex.Message);
+                progressBar.Value = 100;
             }
+        }
+        public void NewProject()
+        {
+            progressBar.Value = 0;
+            this.Title = ProjectDesciprion + "@" + ProjectVersion;
+            var PackMcmeta = new PackMcmeta
+            {
+                Pack = new PackageInfo
+                {
+                    Description = ProjectDesciprion,
+                    pack_format = int.Parse(ProjectVersion),
+                    MaxFormat = int.Parse(ProjectVersion),
+                    MinFormat = int.Parse(ProjectVersion)
+                }
+            };
+            string jsonString = JsonSerializer.Serialize(PackMcmeta, new JsonSerializerOptions
+            {
+                WriteIndented = true // 格式化输出
+            });
+            File.CreateText(ProjectLocation + "\\pack.mcmeta").Close();
+            File.WriteAllText(ProjectLocation + "\\pack.mcmeta", jsonString);
+            originalData = "\\data\\" + ProjectVersion.ToString() + "\\assets\\minecraft\\textures";
+            if (File.Exists(ProjectCover))
+            {
+                File.Copy(ProjectCover, ProjectLocation + "\\pack.png", true);
+
+            }
+            progressBar.Value = 20;
+            InitializeFolderStructure();
+            progressBar.Value = 50;
+            InitializeTextureList();
+            progressBar.Value = 90;
+            InitializeProjectInfo();
+            progressBar.Value = 100;
         }
         public void InitializeFolderStructure()
         {
@@ -171,10 +184,15 @@ namespace MinecraftResourcepacksMaker
 
         }
 
-        public void InitializeTextureList()
+        public void InitializeProjectInfo()
         {
             editMcmeta.IsEnabled = true;
             export.IsEnabled = true;
+            projectName.Text = ProjectDesciprion;
+        }
+
+        public void InitializeTextureList()
+        {
             BlockTextureList();
             EntityTextureList();
             UpdateBlockSelection();
@@ -199,6 +217,10 @@ namespace MinecraftResourcepacksMaker
 
             foreach (FileInfo file in files)
             {
+                if(Path.GetExtension(file.FullName) != ".png")
+                {
+                    continue;
+                }
                 var newItem = new BlockListItem
                 {
                     // 设置显示文本：拼接编号（集合当前数量+1）
@@ -234,6 +256,10 @@ namespace MinecraftResourcepacksMaker
             FileInfo[] files = directory.GetFiles("*", SearchOption.AllDirectories);
             foreach (FileInfo file in files)
             {
+                if (Path.GetExtension(file.FullName) != ".png")
+                {
+                    continue;
+                }
                 var newItem = new EntityListItem
                 {
                     DisplayText = $"{file.Name}",

@@ -5,11 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MinecraftResourcepacksMaker"
         mc:Ignorable="d"
-        Title="MainWindow" Width="1280" Height="720">
+        Title="材质包制作工具" Width="1280" Height="720">
 
     <Grid>
 
-        <StatusBar x:Name="stateBar" Height="30" VerticalAlignment="Bottom"/>
+        <StatusBar x:Name="stateBar" Height="30" VerticalAlignment="Bottom">
+            <StatusBarItem>
+                <TextBlock x:Name="projectName" TextWrapping="Wrap" Text="空项目" Height="15" HorizontalAlignment="Left"/>
+            </StatusBarItem>
+            <Separator Grid.Column="1" ></Separator>
+            <StatusBarItem>
+                <TextBlock x:Name="SelectedItemPathShower" TextWrapping="Wrap" Text="未选择" Height="15" HorizontalAlignment="Left"/>
+            </StatusBarItem>
+            <StatusBarItem HorizontalAlignment="Right">
+                <ProgressBar x:Name="progressBar" Height="10" Width="100"/>
+            </StatusBarItem>
+        </StatusBar>
         <ToolBarPanel Height="26" VerticalAlignment="Top" Grid.ColumnSpan="3">
             <ToolBar Height="26">
                 <Button x:Name="newProject" Content="New" Click="newProject_Click" ToolTip="新建材质包" />
@@ -138,11 +149,12 @@
                     </Grid>
                 </TabItem>
             </TabControl>
-            <Button Content="编辑" HorizontalAlignment="Left" Margin="20,30,0,0" VerticalAlignment="Top" Width="80" Height="30" Click="EditSelected" ToolTip="使用MsPaint编辑该材质"/>
-            <Button Content="重置" HorizontalAlignment="Left" Height="30" Margin="105,30,0,0" VerticalAlignment="Top" Width="80" Click="ResetSelected" ToolTip="将材质重置为原版状态"/>
-            <Button Content="删除" HorizontalAlignment="Left" Height="30" Margin="190,30,0,0" VerticalAlignment="Top" Width="80" Click="DeleteSelected" ToolTip="删除材质文件"/>
+            <Button Content="编辑" HorizontalAlignment="Left" Margin="30,62,0,0" VerticalAlignment="Top" Width="80" Height="30" Click="EditSelected" ToolTip="使用MsPaint编辑该材质"/>
+            <Button Content="重置" HorizontalAlignment="Left" Height="30" Margin="115,62,0,0" VerticalAlignment="Top" Width="80" Click="ResetSelected" ToolTip="将材质重置为原版状态"/>
+            <Button Content="删除" HorizontalAlignment="Center" Height="30" Margin="0,62,0,0" VerticalAlignment="Top" Width="80" Click="DeleteSelected" ToolTip="删除材质文件"/>
             <Image x:Name="preView" Margin="30,30,30,12" Grid.Row="1"/>
-            <TextBlock x:Name="SelectedItemPathShower" HorizontalAlignment="Left" Margin="20,10,0,0" TextWrapping="Wrap" Text="未选择" VerticalAlignment="Top" Height="15"/>
+            <Label Content="操作" HorizontalAlignment="Left" Margin="30,32,0,0" VerticalAlignment="Top"/>
+
         </Grid>
 
 

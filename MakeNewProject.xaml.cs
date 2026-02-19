@@ -52,7 +52,6 @@ namespace MinecraftResourcepacksMaker
 
             List<string> ver = new List<string>();
             StreamReader reader = new StreamReader("versionIndex.txt");
-            string line;
             v = ((ComboBoxItem)version.SelectedItem).Tag.ToString();
 
 
