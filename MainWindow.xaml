@@ -151,7 +151,7 @@
             </TabControl>
             <Button Content="编辑" HorizontalAlignment="Left" Margin="30,77,0,0" VerticalAlignment="Top" Width="80" Height="30" Click="EditSelected" ToolTip="使用MsPaint编辑该材质"/>
             <Button Content="重置" HorizontalAlignment="Left" Height="30" Margin="115,77,0,0" VerticalAlignment="Top" Width="80" Click="ResetSelected" ToolTip="将材质重置为原版状态"/>
-            <Button Content="删除" HorizontalAlignment="Center" Height="30" Margin="0,77,0,0" VerticalAlignment="Top" Width="80" Click="DeleteSelected" ToolTip="删除材质文件"/>
+            <Button Content="删除" HorizontalAlignment="Left" Height="30" Margin="200,77,0,0" VerticalAlignment="Top" Width="80" Click="DeleteSelected" ToolTip="删除材质文件"/>
             <Image x:Name="preView" Margin="30,30,30,12" Grid.Row="1"/>
             <Label Content="操作" HorizontalAlignment="Left" Margin="30,32,0,0" VerticalAlignment="Top"/>
             <Label Content="缩放" HorizontalAlignment="Left" Margin="30,112,0,0" VerticalAlignment="Top"/>
