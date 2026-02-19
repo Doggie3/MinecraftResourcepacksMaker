@@ -1,0 +1,113 @@
+﻿<Window x:Class="MinecraftResourcepacksMaker.EditMcmeta"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MinecraftResourcepacksMaker"
+        mc:Ignorable="d"
+        Title="EditMcmeta" Height="450" Width="300">
+    <Viewbox>
+        <Grid Height="450" Width="300">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Label Content="材质包位置(文件夹)" HorizontalAlignment="Left" Height="30" Margin="10,10,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="114"/>
+            <Button x:Name="SelectFolder" Content="选择" HorizontalAlignment="Left" Height="27" Margin="10,45,0,0" VerticalAlignment="Top" Width="82"/>
+            <Label Content="材质包描述" HorizontalAlignment="Left" Height="30" Margin="10,137,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="70"/>
+            <TextBox x:Name="description" Margin="10,172,10,0" TextWrapping="Wrap" Text="输入描述" VerticalAlignment="Top" Height="25"/>
+            <Label Content="Minecraft版本" HorizontalAlignment="Left" Height="30" Margin="10,77,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="89"/>
+            <ComboBox x:Name="version" HorizontalAlignment="Left" Height="20" Margin="10,112,0,0" VerticalAlignment="Top" Width="150">
+                <ComboBoxItem IsEnabled="False">1	1.6.1快照13w24a到1.8.9</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">2	1.9快照15w31a到1.10.2</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">3	1.11快照16w32a到1.13快照17w47b</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">4	1.13快照17w48a到1.14.4快照19w46b</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">5	1.15预发布版1.15-pre1到1.16.2预发布版1.16.2-pre3</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">6	1.16.2发布候选1.16.2-rc1到1.16.5</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">7	1.17快照20w45a到1.18快照21w38a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">8	1.18快照21w39a到1.18.2</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">9	1.19快照22w11a到1.19.2</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">11	1.19.3快照22w42a到22w44a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">12	1.19.3快照22w45a到1.19.4快照23w07a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">13	1.19.4预发布版1.19.4-pre1到1.20快照23w13a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">14	1.20快照23w14a到23w16a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">15	1.20快照23w17a到1.20.1</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">16	1.20.2快照23w31a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">17	1.20.2快照23w32a到1.20.2-pre1</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">18	1.20.2预发布版1.20.2-pre2到1.20.3快照23w41a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">19	1.20.3快照23w42a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">20	1.20.3快照23w43a到23w44a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">21	1.20.3快照23w45a到23w46a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">22	1.20.3预发布版1.20.3-pre1到1.20.5快照23w51b</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">24	1.20.5快照24w03a到24w04a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">25	1.20.5快照24w05a到24w05b</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">26	1.20.5快照24w06a到24w07a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">28	1.20.5快照24w09a到24w10a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">29	1.20.5快照24w11a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">30	1.20.5快照24w12a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">31	1.20.5快照24w13a到1.20.5-pre3</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">32	1.20.5预发布版1.20.5-pre4到1.20.6</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">33	1.21快照24w18a到24w20a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">34	1.21快照24w21a到1.21.1</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">35	1.21.2快照24w33a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">36	1.21.2快照24w34a到24w35a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">37	1.21.2快照24w36a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">38	1.21.2快照24w37a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">39	1.21.2快照24w38a到24w39a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">40	1.21.2快照24w40a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">41	1.21.2预发布版1.21.2-pre1到1.21.2-pre2</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">42	1.21.2预发布版1.21.2-pre3到1.21.3</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">43	1.21.4快照24w44a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">44	1.21.4快照24w45a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">45	1.21.4快照24w46a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">46	1.21.4预发布版1.21.4-pre1到1.21.4</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">47	1.21.5快照25w02a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">48	1.21.5快照25w03a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">49	1.21.5快照25w04a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">50	1.21.5快照25w05a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">51	1.21.5快照25w06a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">52	1.21.5快照25w07a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">53	1.21.5快照25w08a到25w09b</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">54	1.21.5快照25w10a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">55	1.21.5预发布版1.21.5-pre1到1.21.5</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">56	1.21.6快照25w15a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">57	1.21.6快照25w16a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">58	1.21.6快照25w17a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">59	1.21.6快照25w18a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">60	1.21.6快照25w19a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">61	1.21.6快照25w20a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">62	1.21.6快照25w21a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">63	1.21.6预发布版1.21.6-pre1到1.21.7发布候选1.21.7-rc1</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">64	1.21.7发布候选1.21.7-rc2到1.21.8</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">65.0	1.21.9快照25w31a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">65.1	1.21.9快照25w32a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">65.2	1.21.9快照25w33a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">66.0	1.21.9快照25w34a到25w34b</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">67.0	1.21.9快照25w35a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">68.0	1.21.9快照25w36a到25w36b</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">69.0	1.21.9快照25w37a到1.21.10</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">70.0	1.21.11快照25w41a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">70.1	1.21.11快照25w42a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">71.0	1.21.11快照25w43a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">72.0	1.21.11快照25w44a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">73.0	1.21.11快照25w45a</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">74.0	1.21.11快照25w46a</ComboBoxItem>
+                <ComboBoxItem>75.0	1.21.11预发布版1.21.11-pre1到1.21.11</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">76.0	26.1快照26.1-snapshot-1</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">77.0	26.1快照26.1-snapshot-2</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">78.0	26.1快照26.1-snapshot-3</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">78.1	26.1快照26.1-snapshot-4</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">79.0	26.1快照26.1-snapshot-5</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">80.0	26.1快照26.1-snapshot-6</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">81.0	26.1快照26.1-snapshot-7</ComboBoxItem>
+            </ComboBox>
+            <Button x:Name="OK" Content="开始" HorizontalAlignment="Left" Height="30" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="89" Grid.Row="1"/>
+            <Button x:Name="Cancel" Content="取消" HorizontalAlignment="Left" Height="30" Margin="104,0,0,10" VerticalAlignment="Bottom" Width="89" Grid.Row="1"/>
+            <TextBlock x:Name="projectlocation" Margin="124,45,10,0" TextWrapping="Wrap" Text="项目位置" Height="27" VerticalAlignment="Top"/>
+            <Image x:Name="CoverPreview" Margin="251,16,35,0" Grid.Row="1" Height="64" VerticalAlignment="Top" Width="64"/>
+            <Button x:Name="CoverSelect" Content="+" HorizontalAlignment="Left" Height="30" Margin="10,16,0,0" Grid.Row="1" VerticalAlignment="Top" Width="30"/>
+            <Label Content="选择封面" HorizontalAlignment="Left" Margin="45,16,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+
+        </Grid>
+    </Viewbox>
+</Window>
