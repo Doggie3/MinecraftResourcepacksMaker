@@ -1,8 +1,11 @@
 ﻿using Microsoft.Win32;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
 
 namespace MinecraftResourcepacksMaker
 {
@@ -19,6 +22,7 @@ namespace MinecraftResourcepacksMaker
         public MakeNewProject()
         {
             InitializeComponent();
+            InitializeVersion();
         }
 
         private void SelectFolder_Click(object sender, RoutedEventArgs e)
@@ -43,12 +47,15 @@ namespace MinecraftResourcepacksMaker
                 return;
             }
             ProjectDesciprion = description.Text;
-            string v = "-1";
+
+            string v="-1";
+
+            List<string> ver = new List<string>();
             StreamReader reader = new StreamReader("versionIndex.txt");
-            for (int i = 0; i < version.SelectedIndex; i++)
-            {
-                v = reader.ReadLine();
-            }
+            string line;
+            v = ((ComboBoxItem)version.SelectedItem).Tag.ToString();
+
+
             ProjectVersion = v;
 
             MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
@@ -81,6 +88,35 @@ namespace MinecraftResourcepacksMaker
                 MessageBox.Show(ex.ToString());
             }
         }
+
+        public void InitializeVersion()
+        {
+            List<string> ver = new List<string>();
+            StreamReader reader = new StreamReader("versionIndex.txt");
+            string line;
+            while ((line = reader.ReadLine()) != null)
+            {
+                ver.Add(line);
+            }
+            foreach(string v in ver)
+            {
+                if (Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "\\data\\" + v))
+                {
+                    foreach(var item in version.Items)
+                    {
+                        if(item is ComboBoxItem comboBoxItem)
+                        {
+                            if (comboBoxItem.Content.ToString().StartsWith(v))
+                            {
+                                comboBoxItem.IsEnabled = true;
+                                comboBoxItem.Tag = v;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         public string SelectFile(string title, string filter)
         {
             string selectedFilePath = "null";

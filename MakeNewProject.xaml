@@ -92,7 +92,7 @@
                 <ComboBoxItem IsEnabled="False">72.0	1.21.11快照25w44a</ComboBoxItem>
                 <ComboBoxItem IsEnabled="False">73.0	1.21.11快照25w45a</ComboBoxItem>
                 <ComboBoxItem IsEnabled="False">74.0	1.21.11快照25w46a</ComboBoxItem>
-                <ComboBoxItem>75.0	1.21.11预发布版1.21.11-pre1到1.21.11</ComboBoxItem>
+                <ComboBoxItem IsEnabled="False">75.0	1.21.11预发布版1.21.11-pre1到1.21.11</ComboBoxItem>
                 <ComboBoxItem IsEnabled="False">76.0	26.1快照26.1-snapshot-1</ComboBoxItem>
                 <ComboBoxItem IsEnabled="False">77.0	26.1快照26.1-snapshot-2</ComboBoxItem>
                 <ComboBoxItem IsEnabled="False">78.0	26.1快照26.1-snapshot-3</ComboBoxItem>
