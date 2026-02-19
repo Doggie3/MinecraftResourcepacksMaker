@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using ImageProcessor.Imaging;
+using Microsoft.Win32;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,6 @@ using System.IO.Compression;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Windows;
-using System.Windows.Controls.Primitives;
 using System.Windows.Media.Imaging;
 
 namespace MinecraftResourcepacksMaker
@@ -217,7 +217,7 @@ namespace MinecraftResourcepacksMaker
 
             foreach (FileInfo file in files)
             {
-                if(Path.GetExtension(file.FullName) != ".png")
+                if (Path.GetExtension(file.FullName) != ".png")
                 {
                     continue;
                 }
@@ -350,6 +350,7 @@ namespace MinecraftResourcepacksMaker
                 SelectedItemPathShower.Text = selectedFile;
                 File.Copy(selectedFile, AppDomain.CurrentDomain.BaseDirectory + "temp.png", true);
                 preView.Source = GetImage(AppDomain.CurrentDomain.BaseDirectory + "temp.png");
+                ShowImageSize();
             }
         }
         private void EntitySelected(object sender, RoutedEventArgs e)
@@ -361,6 +362,7 @@ namespace MinecraftResourcepacksMaker
                 SelectedItemPathShower.Text = selectedFile;
                 File.Copy(selectedFile, AppDomain.CurrentDomain.BaseDirectory + "temp.png", true);
                 preView.Source = GetImage(AppDomain.CurrentDomain.BaseDirectory + "temp.png");
+                ShowImageSize();
             }
         }
 
@@ -456,6 +458,7 @@ namespace MinecraftResourcepacksMaker
                 case 7:
                     break;
             }
+            ShowImageSize();
         }
         private void BlockEdit(object sender, RoutedEventArgs e)
         {
@@ -505,6 +508,7 @@ namespace MinecraftResourcepacksMaker
                 case 7:
                     break;
             }
+            ShowImageSize();
         }
         private void BlockReset()
         {
@@ -544,10 +548,79 @@ namespace MinecraftResourcepacksMaker
         }
         private void Export_Click(object sender, RoutedEventArgs e)
         {
-            string folderPath = ProjectLocation;
-            string zipPath = SelectFolder("选择导出位置") + "\\" + ProjectDesciprion + "@" + ProjectVersion + ".zip";
-            ZipFile.CreateFromDirectory(folderPath, zipPath, CompressionLevel.Optimal, false);
-            MessageBox.Show("导出成功！\n文件路径：" + zipPath);
+            try
+            {
+                string folderPath = ProjectLocation;
+                string zipPath = SelectFolder("选择导出位置") + "\\" + ProjectDesciprion + "@" + ProjectVersion + ".zip";
+                ZipFile.CreateFromDirectory(folderPath, zipPath, CompressionLevel.Optimal, false);
+                MessageBox.Show("导出成功！\n文件路径：" + zipPath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("导出失败：" + ex.Message);
+            }
+        }
+
+        // C# - 在保存前确保释放对原文件的所有句柄，使用临时文件再替换
+        private void TextureUpScale(object sender, RoutedEventArgs e)
+        {
+            int x, y;
+            // 读取尺寸并立即释放 Bitmap
+            using (var bitmap = new System.Drawing.Bitmap(selectedFile))
+            {
+                x = bitmap.Width;
+                y = bitmap.Height;
+            }
+
+            string tempPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "temp_upscaled.png");
+            using (var imageFactory = new ImageProcessor.ImageFactory(true))
+            {
+                imageFactory.Load(selectedFile)
+                            .Resize(new System.Drawing.Size(x * 2, y * 2))
+                            .Save(tempPath);
+            }
+
+            // 用替换的原子步骤避免写入冲突
+            File.Copy(tempPath, selectedFile, true);
+            File.Delete(tempPath);
+            ShowImageSize();
+
+        }
+
+        private void TextureDownScale(object sender, RoutedEventArgs e)
+        {
+            int x, y;
+            // 读取尺寸并立即释放 Bitmap
+            using (var bitmap = new System.Drawing.Bitmap(selectedFile))
+            {
+                x = bitmap.Width;
+                y = bitmap.Height;
+            }
+
+            string tempPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "temp_downscaled.png");
+            using (var imageFactory = new ImageProcessor.ImageFactory(true))
+            {
+                var resizeLayer = new ResizeLayer(new System.Drawing.Size(x / 2, y / 2), ImageProcessor.Imaging.ResizeMode.Max);
+                imageFactory.Load(selectedFile)
+                            .Resize(resizeLayer)
+                            .Save(tempPath);
+            }
+
+            // 用替换的原子步骤避免写入冲突
+            File.Copy(tempPath, selectedFile, true);
+            File.Delete(tempPath);
+            ShowImageSize();
+        }
+
+        private void ShowImageSize()
+        {
+            int x, y;
+            using (var bitmap = new System.Drawing.Bitmap(selectedFile))
+            {
+                x = bitmap.Width;
+                y = bitmap.Height;
+            }
+            scaleShower.Text = x.ToString() + "*" + y.ToString();
         }
 
         private void About_Click(object sender, RoutedEventArgs e)
