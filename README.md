@@ -10,7 +10,7 @@
 
 
 
-如何使用：
+##如何使用：
 
 1. 在此处下载 [Release](https://github.com/Doggie3/MinecraftResourcepacksMaker/releases)
 2. 打开MinecraftResourcepacksMaker.exe
@@ -28,7 +28,7 @@
 
 
 
-如何添加列表中不可用版本（*发布版本中自带1.21.11和1.21.10*）：
+##如何添加列表中不可用版本（*发布版本中自带1.21.11和1.21.10*）：
 
 1. 解压游戏核心jar文件
 2. 在MinecraftResourcepacksMaker.exe所在目录下的data文件夹中新建对应版本号的文件夹
