@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="About" Height="400" Width="450" WindowStyle="ThreeDBorderWindow" ResizeMode="NoResize">
     <Grid>
-        <TextBlock TextWrapping="Wrap" Text="Minecraft材质包编辑工具" TextAlignment="Center" Margin="0,64,0,0" FontSize="24" HorizontalAlignment="Center" Height="59" VerticalAlignment="Top"/>
+        <TextBlock TextWrapping="Wrap" Text="Minecraft材质包制作工具" TextAlignment="Center" Margin="0,64,0,0" FontSize="24" HorizontalAlignment="Center" Height="59" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Center" Margin="0,128,0,0" TextWrapping="Wrap" Text="Ver. 1.0" VerticalAlignment="Top" FontSize="20"/>
         <TextBlock HorizontalAlignment="Center" Margin="0,322,0,0" TextWrapping="Wrap" Text="By Doggie" VerticalAlignment="Top"/>
     </Grid>
