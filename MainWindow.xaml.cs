@@ -4,6 +4,7 @@ using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Text.Json;
@@ -118,6 +119,7 @@ namespace MinecraftResourcepacksMaker
                 {
                     return;
                 }
+                ProgressBarSet(10);
                 PackMcmeta packMcmeta = new PackMcmeta();
                 packMcmeta = JsonSerializer.Deserialize<PackMcmeta>(File.ReadAllText(projectFileLocation));
                 ProjectLocation = projectFileLocation.Remove(projectFileLocation.Length - 12);
@@ -125,16 +127,16 @@ namespace MinecraftResourcepacksMaker
                 ProjectVersion = packMcmeta.Pack.pack_format.ToString();
                 this.Title = ProjectDesciprion + "@" + ProjectVersion;
                 originalData = "\\data\\" + ProjectVersion.ToString() + "\\assets\\minecraft\\textures";
-                progressBar.Value = 20;
+                ProgressBarSet(20);
                 InitializeTextureList();
-                progressBar.Value = 50;
+                ProgressBarSet(50);
                 InitializeProjectInfo();
-                progressBar.Value = 100;
+                ProgressBarSet(100);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("打开失败：" + ex.Message);
-                progressBar.Value = 100;
+                ProgressBarSet(0);
             }
         }
         public void NewProject()
@@ -561,7 +563,6 @@ namespace MinecraftResourcepacksMaker
             }
         }
 
-        // C# - 在保存前确保释放对原文件的所有句柄，使用临时文件再替换
         private void TextureUpScale(object sender, RoutedEventArgs e)
         {
             int x, y;
@@ -586,7 +587,6 @@ namespace MinecraftResourcepacksMaker
             ShowImageSize();
 
         }
-
         private void TextureDownScale(object sender, RoutedEventArgs e)
         {
             int x, y;
@@ -621,6 +621,10 @@ namespace MinecraftResourcepacksMaker
                 y = bitmap.Height;
             }
             scaleShower.Text = x.ToString() + "*" + y.ToString();
+        }
+        private void ProgressBarSet(int value)
+        {
+            Dispatcher.Invoke(() => progressBar.Value = value);
         }
 
         private void About_Click(object sender, RoutedEventArgs e)
